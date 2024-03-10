@@ -1,12 +1,30 @@
 import { Request, Response } from "express";
-import { RPCRequest } from "../../rpc";
+import { RPCObserver, RPCRequest } from "../../rpc";
+import { v4 as uuidv4 } from "uuid";
+
+const sendProductData = async (req: Request, res: Response) => {
+  try {
+    const { title, price, model } = req.body;
+    const productData = {
+      _id: uuidv4(),
+      title: title,
+      price: price,
+      model: model,
+    };
+    RPCObserver("PRODUCT_RPC", productData);
+    return res.status(200).json({
+      message: "Product Data send successfully",
+      data: productData._id,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+};
 
 const requestCustomerData = async (req: Request, res: Response) => {
-  //   return res.status(200).json("Product Service controller response.");
   try {
-    const requestPayload = {
-      customerId: "yt686tu8763tyyr98734",
-    };
+    const requestPayload: string = req.params.id;
 
     const responseData = await RPCRequest("CUSTOMER_RPC", requestPayload);
     console.log(responseData);
@@ -17,4 +35,4 @@ const requestCustomerData = async (req: Request, res: Response) => {
   }
 };
 
-export { requestCustomerData };
+export { sendProductData, requestCustomerData };

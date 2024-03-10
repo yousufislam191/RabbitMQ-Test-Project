@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { requestProductData } from "../controllers/customers.controller";
+import {
+  requestProductData,
+  sendCustomerData,
+} from "../controllers/customers.controller";
 
 const customerRouter = Router();
 
-customerRouter.get("/", requestProductData);
+customerRouter.get("/getProduct/:id", requestProductData);
+customerRouter.post("/", sendCustomerData);
 
 export default customerRouter;
