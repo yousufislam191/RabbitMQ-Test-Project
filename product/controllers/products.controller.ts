@@ -11,7 +11,9 @@ const sendProductData = async (req: Request, res: Response) => {
       price: price,
       model: model,
     };
-    RPCObserver("PRODUCT_RPC", productData);
+
+    await RPCObserver("PRODUCT_RPC", productData);
+
     return res.status(200).json({
       message: "Product Data send successfully",
       data: productData._id,

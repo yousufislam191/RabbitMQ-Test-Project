@@ -11,7 +11,9 @@ const sendCustomerData = async (req: Request, res: Response) => {
       country: country,
       gender: gender,
     };
-    RPCObserver("CUSTOMER_RPC", customerData);
+
+    await RPCObserver("CUSTOMER_RPC", customerData);
+
     return res.status(200).json({
       message: "Customer Data send successfully",
       data: customerData._id,
