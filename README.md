@@ -2,15 +2,18 @@
 
 In this project, there has been used Microservice Architecture where `RabbitMQ` has been integrated as a Message Broker to communicate with Customer Service and Product Service. Both services are running individually on different ports.
 
-In this Backend project there are 2 routes which are:
+In this Backend project, there are 4 routes which are:
 
-1. For customer: `GET http://localhost:3000/api/product`
+1. **For customer:**
 
-2. For product: `GET http://localhost:3001/api/customer`
+   - `GET http://localhost:3000/api/customer/getProduct/:id` : For getting product data
+   - `POST http://localhost:3000/api/customer` : For sending customer data
 
-The 1st API will return the product details and the 2nd will return the customer details from the RabbitMQ server queue.
+2. **For product:**
+   - `GET http://localhost:3001/api/product/getCustomer/:id` : For getting customer data
+   - `POST http://localhost:3001/api/product` : For sending product data
 
-### Dummy Data that will be returned
+### Example of Data
 
 **Customer Data:**
 
